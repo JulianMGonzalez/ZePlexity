@@ -1,0 +1,20 @@
+<div class="chat-container">
+  <div class="chat-messages">
+    <div class="grid gap-y-2 w-4xl mx-auto">
+      <!-- Chat message -->
+      <app-my-message
+        [text]="'Estadios en las que juega la selección argentina '"
+      ></app-my-message>
+      <app-chat-message
+        [text]="
+          'La Selección Argentina de fútbol juega en varios estadios del país, pero su sede principal es el Estadio Monumental en Buenos Aires. Sin embargo, dependiendo del rival, la competición o la logística, también juega en otros estadios de distintas provincias. Aquí te dejo una lista con los estadios más comunes donde juega la Selección Argentina:'
+        "
+      ></app-chat-message>
+    </div>
+  </div>
+  <!-- Message box -->
+  <div class="w-4xl mx-auto">
+    <app-text-message-box placeholder="¿Cómo puedo ayudarte?" [disabledCorrections]="true" (onMessage)="handleMessage($event)"></app-text-message-box>
+  </div>
+  <!-- <app-typing-loader></app-typing-loader> -->
+</div>
