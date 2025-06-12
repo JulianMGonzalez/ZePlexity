@@ -7,5 +7,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatMessageComponent {
-  @Input({ required: true }) text: string = '';
+  @Input({ required: true }) text: any = '';
 }
