@@ -44,11 +44,11 @@ em {
 }
 
 .chat-container {
-  @apply flex flex-col flex-auto flex-shrink-0 rounded-2xl  h-[calc(100vh-90px)] p-4 w-[calc(100vw-500px)];
+  @apply flex flex-col flex-auto flex-shrink-0 rounded-2xl h-[calc(100vh-5px)] w-[calc(100vw-500px)] mx-auto;
 }
 
 .chat-messages {
-  @apply flex flex-col h-full overflow-x-auto mb-4 overflow-auto;
+  @apply flex flex-col h-3/4 overflow-x-auto mb-4 overflow-auto;
 }
 
 

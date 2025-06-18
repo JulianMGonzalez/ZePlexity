@@ -9,23 +9,18 @@ import { Message } from '@interfaces/message.interface';
 import { OpenAIService } from 'app/presentation/services/openAI.service';
 
 @Component({
-  selector: 'app-orthography-page',
+  selector: 'app-chat-template',
   imports: [
     ChatMessageComponent,
     MyMessageComponent,
     TypingLoaderComponent,
     TextMessageBoxComponent,
   ],
-  templateUrl: './orthographyPage.component.html',
+  templateUrl: './chatTemplate.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class OrthographyPageComponent {
-  @Input() messages = signal<Message[]>([
-    {
-      text: 'Hello, how can I assist you today?',
-      isGpt: false,
-    },
-  ]);
+export class ChatTemplateComponent {
+  @Input() messages = signal<Message[]>([]);
   @Input() isLoading = signal<boolean>(false);
 
   public openAIService = inject(OpenAIService);
