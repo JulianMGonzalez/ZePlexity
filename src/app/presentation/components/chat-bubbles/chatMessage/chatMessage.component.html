@@ -1,14 +1,13 @@
 <div class="col-start-1 col-end-9 p-3">
-  <div class="flex flex-row items-start gap-2">
+  <div class="flex items-start gap-3">
     <div
-      class="flex items-center justify-center h-10 w-10 rounded-full bg-green-500 text-white"
-    >
+      class="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white text-base font-semibold">
       G
     </div>
-    <div
-      class="relative ml-3 text-sm bg-gray-900 bg-opacity-25 pt-3 p-2 rounded-2xl"
-    >
-      {{ text }}
+
+    <!-- Contenedor general -->
+    <div class="relative text-sm max-w-full break-words w-full">
+      <markdown class="markdown-message" [data]="text"></markdown>
     </div>
   </div>
 </div>
