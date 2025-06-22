@@ -23,6 +23,7 @@ export class TextMessageBoxComponent {
 
   @Input() placeholder: string = '';
   @Input() disabledCorrections: boolean = false;
+  @Input() isLoading: boolean = false;
 
   @Output() onMessage = new EventEmitter<TextMessageBoxInterface>();
 

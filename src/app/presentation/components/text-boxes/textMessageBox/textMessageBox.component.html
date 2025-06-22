@@ -1,6 +1,6 @@
-<form [formGroup]="form">
+<form [formGroup]="form" class="w-full">
   <div class="mb-2 mx-auto rounded-lg bg-gray-50 dark:bg-gray-600 dark:border-gray-600">
-    <div class="px-4 py-2 bg-white rounded-md dark:bg-gray-700">
+    <div class="p-1 bg-white rounded-md dark:bg-gray-700">
       <label for="comment" class="sr-only">TextBox</label>
 
       <div class="relative">
@@ -37,8 +37,8 @@
 
         <!-- Botón enviar -->
         <button
-          class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          [disabled]="form.invalid"
+          class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 disabled:opacity-50"
+          [disabled]="form.invalid || isLoading"
           (click)="handleSubmit()"
         >
           <i class="fa-solid fa-paper-plane"></i>
@@ -67,7 +67,7 @@
   </div>
 
   <!-- Mensaje de advertencia fuera del contenedor relativo -->
-  <small class="block text-center text-gray-500 dark:text-gray-300">
+  <small class="block text-center pb-1 text-gray-500 dark:text-gray-300">
     Plexity puede cometer errores. Comprueba la información importante.
   </small>
 </form>

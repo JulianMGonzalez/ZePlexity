@@ -1,22 +1,22 @@
 <main class="flex flex-row">
-  <nav
-    class="hidden sm:flex flex-col w-[370px] min-h-[calc(100vh)] bg-gray-900"
-  >
+  <nav class="hidden sm:flex flex-col w-[370px] min-h-[calc(100vh)] bg-gray-900">
     <h1
       class="font-bold text-lg lg:text-3xl bg-gradient-to-br from-white via-white/50 bg-clip-text text-transparent m-5"
     >
-      Implexity<span class="text-indigo-500">.</span>
+      ZePlexity<span class="text-indigo-500">.</span>
     </h1>
 
     <!-- Nav Links -->
     <div class="">
       @for (route of menuItems; track route.path) {
-      <app-sidebar-menu-item
-        [path]="route.data!['path']"
-        [title]="route.data!['title']"
-        [description]="route.data!['description']"
-        [icon]="route.data!['icon']"
-      ></app-sidebar-menu-item>
+        @if (route.path) {
+          <app-sidebar-menu-item
+            [path]="route.path"
+            [title]="route.data!['title']"
+            [description]="route.data!['description']"
+            [icon]="route.data!['icon']"
+          ></app-sidebar-menu-item>
+        }
       }
     </div>
 
@@ -25,7 +25,7 @@
 
   <section class="flex flex-col w-full h-[calc(100vh)] bg-white/10">
     <div class="flex h-full flex-row">
-      <div class="flex flex-col flex-auto p-1">
+      <div class="flex flex-col flex-auto">
         <router-outlet />
       </div>
     </div>

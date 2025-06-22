@@ -6,15 +6,10 @@ import { routes } from '../../../app.routes';
 
 @Component({
   selector: 'app-dashboard-layout',
-  imports: [
-    CommonModule,
-    RouterModule,
-    SidebarMenuItemComponent
-  ],
+  imports: [CommonModule, RouterModule, SidebarMenuItemComponent],
   templateUrl: './dashboardLayout.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardLayoutComponent {
-
-  public menuItems = routes[0].children?.filter(route => route.data)
- }
+  public menuItems = routes[0].children?.filter((route) => route.data);
+}
