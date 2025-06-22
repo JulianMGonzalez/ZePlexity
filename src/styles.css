@@ -1,4 +1,9 @@
-@import "tailwindcss";/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+/* You can add global styles to this file, and also import other style files */
+
+@import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
+@import 'prismjs/plugins/line-highlight/prism-line-highlight.css';
+
 
 @font-face {
   font-family: 'Poppins';
@@ -7,7 +12,8 @@
   font-style: normal;
 }
 
-html, body {
+html,
+body {
   @apply bg-gray-900;
   color: white;
   font-family: 'Poppins', sans-serif !important;
@@ -44,19 +50,111 @@ em {
 }
 
 .chat-container {
-  @apply flex flex-col flex-auto flex-shrink-0 rounded-2xl h-[calc(100vh-5px)] w-[calc(100vw-500px)] mx-auto;
+  @apply flex flex-col h-screen max-h-screen w-full;
 }
 
 .chat-messages {
-  @apply flex flex-col h-3/4 overflow-x-auto mb-4 overflow-auto;
+  @apply flex flex-col h-3/4 overflow-x-auto overflow-auto;
+}
+
+/* Scroll personalizado estilo ChatGPT */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-600 rounded-lg;
+  transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-500;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
 
 
 /* Animations */
 
-.fade-in { animation: fadeIn .3s; }
+.fade-in {
+  animation: fadeIn .3s;
+}
 
 @keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+
+.markdown-message {
+  /* quitar padding y fondo general */
+  @apply px-0 py-0 bg-transparent;
+
+  p {
+    @apply mb-2 text-white;
+    /* texto plano */
+  }
+
+  pre {
+    @apply bg-gray-900 rounded-2xl px-4 py-3 text-white mb-4;
+  }
+
+
+  code {
+    @apply text-pink-400;
+  }
+
+  pre code {
+    @apply text-sm;
+  }
+
+  blockquote {
+    @apply border-l-4 border-blue-400 pl-4 italic text-blue-400;
+  }
+
+  .comment {
+    @apply text-gray-500 italic;
+  }
+
+  .punctuation {
+    @apply text-white;
+  }
+
+  .property {
+    @apply text-blue-400;
+  }
+
+  h1 {
+    @apply text-2xl font-bold mb-2;
+  }
+
+  h2 {
+    @apply text-xl font-bold mb-2;
+  }
+
+  h3 {
+    @apply text-lg font-bold mb-2;
+  }
+
+  ul,
+  ol {
+    @apply mb-2 list-decimal;
+  }
+  li::marker {
+    @apply text-gray-500;
+  }
 }
