@@ -138,16 +138,14 @@ em {
 
 
 .markdown-message {
-  /* quitar padding y fondo general */
   @apply px-0 py-0 bg-transparent;
 
   p {
-    @apply mb-2 text-white;
-    /* texto plano */
+    @apply mb-2 text-gray-600 dark:text-gray-300;
   }
 
   pre {
-    @apply bg-gray-900 rounded-2xl px-4 py-3 text-white mb-4;
+    @apply bg-gray-100 dark:bg-gray-900 rounded-2xl px-4 py-3 text-gray-600 dark:text-gray-300 mb-4;
   }
 
 
@@ -187,11 +185,40 @@ em {
     @apply text-lg font-bold mb-2;
   }
 
-  ul,
-  ol {
-    @apply mb-2 list-decimal;
+  ul {
+    @apply mb-2 list-disc list-inside space-y-1;
   }
+
+  ol {
+    @apply mb-2 list-decimal list-inside space-y-1;
+  }
+
   li::marker {
     @apply text-gray-500;
+  }
+
+  li > p {
+    @apply inline mb-0;
+  }
+
+  hr {
+    @apply my-4 border-gray-300 dark:border-gray-700;
+  }
+
+  table {
+    @apply w-full text-left border-collapse mb-4;
+  }
+
+  th,
+  td {
+    @apply border border-gray-300 dark:border-gray-700 px-3 py-2;
+  }
+
+  th {
+    @apply bg-gray-200 dark:bg-gray-800 font-semibold;
+  }
+
+  a {
+    @apply text-indigo-500 hover:underline;
   }
 }
