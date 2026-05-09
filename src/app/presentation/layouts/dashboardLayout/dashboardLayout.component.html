@@ -23,7 +23,7 @@
         [attr.title]="collapsed() ? 'Expandir' : 'Colapsar'"
       >
         <i
-          class="fa-solid"
+          class="fa-solid text-gray-600 dark:text-gray-300"
           [class.fa-chevron-right]="collapsed()"
           [class.fa-chevron-left]="!collapsed()"
         ></i>
@@ -31,7 +31,7 @@
     </div>
 
     <!-- Nav Links -->
-    <div class="flex flex-col gap-1 px-2 py-2">
+    <div class="flex flex-1 flex-col gap-1 overflow-y-auto px-2 py-2">
       @for (route of menuItems; track route.path) {
         @if (route.path) {
           <app-sidebar-menu-item
@@ -44,6 +44,45 @@
       }
     </div>
     <!-- End Nav Links -->
+
+    <!-- Footer -->
+    <div
+      class="mt-auto flex shrink-0 flex-col gap-1 border-t border-gray-200 px-2 py-3 dark:border-gray-700/50"
+    >
+      <button
+        type="button"
+        class="group flex cursor-pointer items-center gap-3 rounded-lg text-gray-600 transition-colors hover:bg-black/5 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-white/10 dark:hover:text-white"
+        [ngClass]="collapsed() ? 'justify-center p-3' : 'px-3 py-2.5'"
+        [attr.title]="collapsed() ? 'Ajustes' : null"
+        aria-label="Ajustes"
+      >
+        <i class="fa-solid fa-gear w-5 shrink-0 text-center text-base"></i>
+        @if (!collapsed()) {
+          <span class="text-sm font-semibold whitespace-nowrap">Ajustes</span>
+        }
+      </button>
+
+      <button
+        type="button"
+        class="group flex cursor-pointer items-center gap-3 rounded-lg text-gray-700 transition-colors hover:bg-black/5 dark:text-gray-200 dark:hover:bg-white/10"
+        [ngClass]="collapsed() ? 'justify-center p-2' : 'px-2 py-2'"
+        [attr.title]="collapsed() ? 'Mi perfil' : null"
+        aria-label="Mi perfil"
+      >
+        <div
+          class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 text-sm font-semibold text-white"
+        >
+          ZP
+        </div>
+        @if (!collapsed()) {
+          <div class="flex min-w-0 flex-col text-left">
+            <span class="text-sm font-semibold whitespace-nowrap">Mi perfil</span>
+            <small class="truncate text-xs text-gray-500">Configurar cuenta</small>
+          </div>
+        }
+      </button>
+    </div>
+    <!-- End Footer -->
   </nav>
 
   <section class="flex h-[calc(100vh)] w-full flex-col bg-white/10">

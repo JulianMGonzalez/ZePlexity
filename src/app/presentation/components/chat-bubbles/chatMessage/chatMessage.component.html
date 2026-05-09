@@ -7,7 +7,11 @@
 
     <!-- Contenedor general -->
     <div class="relative text-sm bg-gray-100 dark:bg-gray-900 dark:bg-opacity-25 px-4 py-3 rounded-2xl max-w-full break-words w-full dark:text-gray-300">
-      <markdown class="markdown-message" [data]="text"></markdown>
+      <markdown
+        class="markdown-message"
+        katex
+        [katexOptions]="katexOptions"
+        [data]="preparedMarkdown()"></markdown>
     </div>
   </div>
 </div>

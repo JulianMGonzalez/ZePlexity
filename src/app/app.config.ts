@@ -1,3 +1,5 @@
+import './katex-globals';
+
 import {
   ApplicationConfig,
   provideBrowserGlobalErrorListeners,

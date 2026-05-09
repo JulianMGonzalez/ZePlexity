@@ -7,7 +7,8 @@
     "paths": {
       "@components/*": ["app/presentation/components/*"],
       "@use-cases/*": ["app/core/use-cases/*"],
-      "@interfaces/*": ["app/interfaces/*"]
+      "@interfaces/*": ["app/interfaces/*"],
+      "@utils/*": ["app/presentation/utils/*"]
     },
     "strict": true,
     "noImplicitOverride": true,
