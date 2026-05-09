@@ -29,6 +29,9 @@ importers:
       '@tailwindcss/postcss':
         specifier: ^4.1.8
         version: 4.3.0
+      katex:
+        specifier: ^0.16.45
+        version: 0.16.45
       marked:
         specifier: ^15.0.12
         version: 15.0.12
@@ -6663,8 +6666,7 @@ snapshots:
   commander@7.2.0:
     optional: true
 
-  commander@8.3.0:
-    optional: true
+  commander@8.3.0: {}
 
   commitizen@4.3.1(@types/node@25.6.2)(typescript@5.8.3):
     dependencies:
@@ -7956,7 +7958,6 @@ snapshots:
   katex@0.16.45:
     dependencies:
       commander: 8.3.0
-    optional: true
 
   keyv@4.5.4:
     dependencies:

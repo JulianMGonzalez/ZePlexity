@@ -1,12 +1,13 @@
 @import "tailwindcss";
 
 /* Sin modo oscuro de Tailwind: v4 usa prefers-color-scheme por defecto; dark: solo bajo .tw-dark-root (no existe en el DOM). */
-@custom-variant dark (&:where(.tw-dark-root, .tw-dark-root *));
+/* @custom-variant dark (&:where(.tw-dark-root, .tw-dark-root *)); */
 
 /* You can add global styles to this file, and also import other style files */
 
 @import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 @import 'prismjs/plugins/line-highlight/prism-line-highlight.css';
+@import 'katex/dist/katex.min.css';
 
 
 @font-face {
@@ -138,63 +139,96 @@ em {
 
 
 .markdown-message {
-  @apply px-0 py-0 bg-transparent;
+  @apply px-0 py-0 bg-transparent text-gray-800 dark:text-gray-200;
+
+  .katex-display {
+    @apply my-3 max-w-full overflow-x-auto;
+  }
+
+  .katex {
+    @apply text-[1em] text-inherit;
+  }
 
   p {
-    @apply mb-2 text-gray-600 dark:text-gray-300;
+    @apply mb-2 text-gray-700 dark:text-gray-300 leading-relaxed;
   }
 
   pre {
-    @apply bg-gray-100 dark:bg-gray-900 rounded-2xl px-4 py-3 text-gray-600 dark:text-gray-300 mb-4;
+    @apply mb-4 rounded-2xl border px-4 py-3 text-sm leading-relaxed;
+    @apply bg-slate-50 border-slate-200 text-slate-800;
+    @apply dark:bg-slate-950/80 dark:border-slate-700/80 dark:text-slate-200;
+    @apply shadow-sm dark:shadow-none;
   }
 
-
-  code {
-    @apply text-pink-400;
+  /* Código en línea: legible en claro y en oscuro */
+  :not(pre) > code {
+    @apply rounded-md px-1.5 py-0.5 text-[0.9em] font-medium;
+    @apply bg-rose-50 text-rose-700 ring-1 ring-rose-100;
+    @apply dark:bg-pink-950/50 dark:text-pink-300 dark:ring-pink-900/60;
   }
 
   pre code {
-    @apply text-sm;
+    @apply text-sm font-normal bg-transparent p-0 ring-0 text-inherit;
   }
 
   blockquote {
-    @apply border-l-4 border-blue-400 pl-4 italic text-blue-400;
+    @apply my-3 border-l-4 pl-4 py-0.5 italic;
+    @apply border-indigo-400 bg-indigo-50/60 text-slate-700;
+    @apply dark:border-sky-500 dark:bg-sky-950/35 dark:text-slate-200;
+  }
+
+  .doctype-tag,
+  .tag{
+    @apply text-red-500 dark:text-red-400;
+  }
+
+  .name,
+  .attr-name{
+    @apply text-orange-700 dark:text-orange-400;
+  }
+
+  .attr-value{
+    @apply text-green-700 dark:text-green-400;
+  }
+
+  .selector{
+    @apply text-orange-600 dark:text-orange-400;
   }
 
   .comment {
-    @apply text-gray-500 italic;
+    @apply text-slate-500 italic dark:text-slate-400;
   }
 
   .punctuation {
-    @apply text-white;
+    @apply text-indigo-600 dark:text-indigo-300;
   }
 
   .property {
-    @apply text-blue-400;
+    @apply text-sky-700 dark:text-sky-400;
   }
 
   h1 {
-    @apply text-2xl font-bold mb-2;
+    @apply text-2xl font-bold mb-2 mt-1 text-gray-900 dark:text-gray-50 tracking-tight;
   }
 
   h2 {
-    @apply text-xl font-bold mb-2;
+    @apply text-xl font-bold mb-2 mt-2 text-gray-900 dark:text-gray-50 tracking-tight;
   }
 
   h3 {
-    @apply text-lg font-bold mb-2;
+    @apply text-lg font-bold mb-2 mt-2 text-gray-900 dark:text-gray-100;
   }
 
   ul {
-    @apply mb-2 list-disc list-inside space-y-1;
+    @apply mb-2 list-disc list-inside space-y-1 text-gray-700 dark:text-gray-300;
   }
 
   ol {
-    @apply mb-2 list-decimal list-inside space-y-1;
+    @apply mb-2 list-decimal list-inside space-y-1 text-gray-700 dark:text-gray-300;
   }
 
   li::marker {
-    @apply text-gray-500;
+    @apply text-slate-400 dark:text-slate-500;
   }
 
   li > p {
@@ -202,23 +236,33 @@ em {
   }
 
   hr {
-    @apply my-4 border-gray-300 dark:border-gray-700;
+    @apply my-5 border-0 border-t border-slate-200 dark:border-slate-700;
   }
 
   table {
-    @apply w-full text-left border-collapse mb-4;
+    @apply w-full text-left border-collapse mb-4 text-sm;
+    @apply rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700;
   }
 
   th,
   td {
-    @apply border border-gray-300 dark:border-gray-700 px-3 py-2;
+    @apply border-slate-200 dark:border-slate-700 px-3 py-2;
   }
 
   th {
-    @apply bg-gray-200 dark:bg-gray-800 font-semibold;
+    @apply bg-slate-100 text-slate-800 font-semibold dark:bg-slate-800/90 dark:text-slate-100;
+  }
+
+  td {
+    @apply bg-white text-slate-700 dark:bg-slate-900/40 dark:text-slate-200;
+  }
+
+  tbody tr:nth-child(even) td {
+    @apply bg-slate-50 dark:bg-slate-800/30;
   }
 
   a {
-    @apply text-indigo-500 hover:underline;
+    @apply font-medium text-indigo-600 underline-offset-2 hover:underline;
+    @apply dark:text-indigo-400 dark:hover:text-indigo-300;
   }
 }
