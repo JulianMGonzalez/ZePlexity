@@ -18,7 +18,6 @@
 
 html,
 body {
-  color: white;
   font-family: 'Poppins', sans-serif !important;
 }
 
@@ -36,11 +35,11 @@ ul {
 }
 
 strong {
-  @apply font-bold text-indigo-400 text-xl;
+  @apply font-bold text-xl;
 }
 
 em {
-  @apply italic text-pink-500;
+  @apply italic;
 }
 
 
