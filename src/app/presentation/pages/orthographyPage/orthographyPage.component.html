@@ -1,6 +1,22 @@
-<div class="chat-container">
-   <!-- Mensajes -->
-  <div class="chat-messages flex-1 overflow-y-auto">
+<app-chat-shell [empty]="messages().length === 0">
+  <div chatHero>
+    <app-init-chat-hero />
+  </div>
+
+  <div chatComposer>
+    <app-text-message-box
+      placeholder="¿Cómo puedo ayudarte?"
+      [disabledCorrections]="true"
+      [isLoading]="isLoading()"
+      (onMessage)="handleMessage($event)"
+    ></app-text-message-box>
+  </div>
+
+  <div chatTrail>
+    <app-init-chat-suggestions />
+  </div>
+
+  <div chatThread class="w-full">
     <div class="grid gap-y-2 w-4xl mx-auto">
       @for (message of messages(); track $index) {
         @if (message.isGpt) {
@@ -11,16 +27,10 @@
       }
     </div>
   </div>
-  <!-- Message box -->
-  <div class="sticky bottom-0 max-w-4xl mx-auto w-full">
-    <app-text-message-box
-      placeholder="¿Cómo puedo ayudarte?"
-      [disabledCorrections]="true"
-      [isLoading]="isLoading()"
-      (onMessage)="handleMessage($event)"
-    ></app-text-message-box>
-  </div>
+
   @if (isLoading()) {
-    <app-typing-loader />
+    <ng-container chatAux>
+      <app-typing-loader />
+    </ng-container>
   }
-</div>
+</app-chat-shell>

@@ -1,29 +1,35 @@
-<div class="chat-container">
-  <div class="chat-messages">
-    <div class="grid gap-y-2 w-4xl mx-auto">
-      <!-- Chat message -->
-      @for (message of messages(); track $index) {
-        @if (message.isGpt) {
-          <app-chat-message
-            [text]="
-              'La Selección Argentina de fútbol juega en varios estadios del país, pero su sede principal es el Estadio Monumental en Buenos Aires. Sin embargo, dependiendo del rival, la competición o la logística, también juega en otros estadios de distintas provincias. Aquí te dejo una lista con los estadios más comunes donde juega la Selección Argentina:'
-            "
-          />
-        } @else {
-          <app-my-message [text]="'Estadios en las que juega la selección argentina '"></app-my-message>
-        }
-      }
-    </div>
+<app-chat-shell [empty]="messages().length === 0">
+  <div chatHero>
+    <app-init-chat-hero />
   </div>
-  <!-- Message box -->
-  <div class="w-4xl mx-auto">
+
+  <div chatComposer>
     <app-text-message-box
       placeholder="¿Cómo puedo ayudarte?"
       [disabledCorrections]="true"
       (onMessage)="handleMessage($event)"
     ></app-text-message-box>
   </div>
+
+  <div chatTrail>
+    <app-init-chat-suggestions />
+  </div>
+
+  <div chatThread class="w-full">
+    <div class="grid gap-y-2 w-4xl mx-auto">
+      @for (message of messages(); track $index) {
+        @if (message.isGpt) {
+          <app-chat-message [text]="message.text" />
+        } @else {
+          <app-my-message [text]="message.text"></app-my-message>
+        }
+      }
+    </div>
+  </div>
+
   @if (isLoading()) {
-    <app-typing-loader />
+    <ng-container chatAux>
+      <app-typing-loader />
+    </ng-container>
   }
-</div>
+</app-chat-shell>

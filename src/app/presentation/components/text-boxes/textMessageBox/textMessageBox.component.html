@@ -1,73 +1,85 @@
 <form [formGroup]="form" class="w-full">
-  <div class="mb-2 mx-auto rounded-lg bg-gray-50 dark:bg-gray-600 dark:border-gray-600">
-    <div class="p-1 bg-white rounded-md dark:bg-gray-700">
-      <label for="comment" class="sr-only">TextBox</label>
+  <div
+    class="mx-auto flex flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-md shadow-gray-300/50 dark:border-gray-700 dark:bg-gray-800 dark:shadow-gray-800/50"
+  >
+    <label for="comment" class="sr-only">Mensaje</label>
 
-      <div class="relative">
-        <div class="flex overflow-x-auto space-x-4 p-2">
-          @for (file of selectedFiles; track $index) {
-            <div class="flex items-center min-w-[300px] h-15 border-2 border-gray-500 rounded-lg">
-              <div class="bg-cyan-900 h-full w-10 flex items-center justify-center rounded-l-lg">
-                <i class="fa-solid fa-file-lines text-white text-2xl"></i>
-              </div>
-              <div class="pl-2 pr-2 flex flex-col justify-center">
-                <span class="text-sm font-medium">{{ file.name }}</span>
-                <small class="text-xs text-gray-400">{{ file.type }}</small>
-              </div>
+    @if (selectedFilesList().length > 0) {
+      <div class="flex gap-2 overflow-x-auto px-4 pt-3 pb-1">
+        @for (file of selectedFilesList(); track $index) {
+          <div
+            class="flex h-14 min-w-[260px] shrink-0 items-center rounded-xl border border-gray-200 bg-gray-50"
+          >
+            <div
+              class="flex h-full w-10 shrink-0 items-center justify-center rounded-l-xl bg-slate-700"
+            >
+              <i class="fa-solid fa-file-lines text-lg text-white" aria-hidden="true"></i>
             </div>
-          }
-        </div>
+            <div class="flex min-w-0 flex-col justify-center px-3">
+              <span class="truncate text-sm font-medium text-gray-900">{{ file.name }}</span>
+              <small class="truncate text-xs text-gray-500">{{ file.type }}</small>
+            </div>
+          </div>
+        }
+      </div>
+    }
 
-        <!-- Archivos -->
+    <div class="flex items-start gap-3 px-4 pt-3">
+      <i
+        class="fa-solid fa-wand-magic-sparkles mt-2.5 shrink-0 text-base text-gray-500 dark:text-gray-500"
+        aria-hidden="true"
+      ></i>
+      <textarea
+        #promptTextarea
+        formControlName="prompt"
+        autofocus
+        id="comment"
+        rows="2"
+        class="max-h-56 min-h-[2.75rem] flex-1 resize-none border-0 bg-transparent py-2 text-sm text-gray-900 outline-none placeholder:text-gray-400 focus:ring-0 dark:text-gray-300 dark:placeholder:text-gray-600"
+        [placeholder]="placeholder || 'Ask AI a question or make a request...'"
+        [autocomplete]="disabledCorrections ? 'off' : 'on'"
+        [spellcheck]="disabledCorrections ? 'off' : 'on'"
+        (input)="autoResize()"
+        (keydown.enter)="handleSubmit()"
+      ></textarea>
+    </div>
 
-        <!-- Textarea -->
-        <textarea
-          #promptTextarea
-          formControlName="prompt"
-          autofocus
-          id="comment"
-          rows="2"
-          class="w-full max-h-56 pt-2 p-1 text-sm outline-0 text-gray-900 focus:ring-0 dark:text-white dark:placeholder-gray-400 resize-none"
-          [placeholder]="placeholder"
-          [autocomplete]="disabledCorrections ? 'off' : 'on'"
-          [spellcheck]="disabledCorrections ? 'off' : 'on'"
-          (input)="autoResize()"
-          (keydown.enter)="handleSubmit()"
-        ></textarea>
-
-        <!-- Botón enviar -->
+    <div
+      class="mt-1 flex flex-wrap items-center justify-between gap-3 border-t border-gray-100 px-4 pt-3 pb-4 dark:border-gray-600 dark:border-none"
+    >
+      <div class="flex flex-wrap items-center gap-2">
         <button
-          class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 disabled:opacity-50"
+          type="button"
+          (click)="fileInput.click()"
+          class="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-700 shadow-sm transition-colors hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
+        >
+          <i class="fa-solid fa-paperclip text-sm text-gray-600" aria-hidden="true"></i>
+          <small class="text-xs">Attach</small>
+        </button>
+        <input
+          #fileInput
+          type="file"
+          class="hidden"
+          multiple
+          (change)="handleSelectedFile($event)"
+        />
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button
+          type="button"
+          class="inline-flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-xl bg-indigo-900 text-white transition-colors hover:bg-indigo-950 disabled:pointer-events-none disabled:opacity-40"
           [disabled]="form.invalid || isLoading"
           (click)="handleSubmit()"
+          aria-label="Enviar mensaje"
         >
-          <i class="fa-solid fa-paper-plane"></i>
+          <i class="fa-solid fa-arrow-up text-sm" aria-hidden="true"></i>
         </button>
-
-        <!-- Adjuntar archivo -->
-        <div class="mt-2">
-          <button
-            (click)="fileInput.click()"
-            type="button"
-            class="inline-flex justify-center items-center p-2 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
-          >
-            <i class="fa-solid fa-paperclip w-4 h-4"></i>
-            <span class="sr-only">Attach file</span>
-          </button>
-          <input
-            #fileInput
-            type="file"
-            class="hidden"
-            multiple
-            (change)="handleSelectedFile($event)"
-          />
-        </div>
       </div>
     </div>
   </div>
 
-  <!-- Mensaje de advertencia fuera del contenedor relativo -->
-  <small class="block text-center pb-1 text-gray-500 dark:text-gray-300">
+  <small *ngIf="!isLoading" class="mt-2 block text-center text-xs text-gray-500">
     Plexity puede cometer errores. Comprueba la información importante.
   </small>
 </form>

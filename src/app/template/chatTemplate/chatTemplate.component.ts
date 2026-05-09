@@ -4,6 +4,9 @@ import { ChatMessageComponent } from '@components/chat-bubbles/chatMessage/chatM
 import { MyMessageComponent } from '@components/chat-bubbles/myMessage/myMessage.component';
 import { TextMessageBoxComponent } from '@components/text-boxes/textMessageBox/textMessageBox.component';
 import { TextMessageBoxInterface } from '@interfaces/textMessageBox.interface';
+import { ChatShellComponent } from '@components/chat-shell/chat-shell.component';
+import { InitChatHeroComponent } from '@components/init-chat/init-chat-hero.component';
+import { InitChatSuggestionsComponent } from '@components/init-chat/init-chat-suggestions.component';
 import { TypingLoaderComponent } from '@components/typingLoader/typingLoader.component';
 import { Message } from '@interfaces/message.interface';
 import { OpenAIService } from 'app/presentation/services/openAI.service';
@@ -15,6 +18,9 @@ import { OpenAIService } from 'app/presentation/services/openAI.service';
     MyMessageComponent,
     TypingLoaderComponent,
     TextMessageBoxComponent,
+    ChatShellComponent,
+    InitChatHeroComponent,
+    InitChatSuggestionsComponent,
   ],
   templateUrl: './chatTemplate.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,0 +1,22 @@
+<div
+  class="chat-shell w-full max-w-4xl mx-auto"
+  [class.chat-shell--empty]="empty()"
+  [class.chat-shell--active]="!empty()"
+>
+  <div class="chat-shell__body">
+    <!-- Primero el hilo: en conversación queda arriba; en vacío va display:none y no afecta al centro. -->
+    <div class="chat-shell__messages">
+      <ng-content select="[chatThread]" />
+      <ng-content select="[chatAux]" />
+    </div>
+    <div class="chat-shell__hero">
+      <ng-content select="[chatHero]" />
+    </div>
+    <div class="chat-shell__composer">
+      <ng-content select="[chatComposer]" />
+    </div>
+    <div class="chat-shell__trail">
+      <ng-content select="[chatTrail]" />
+    </div>
+  </div>
+</div>

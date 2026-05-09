@@ -1,4 +1,8 @@
 @import "tailwindcss";
+
+/* Sin modo oscuro de Tailwind: v4 usa prefers-color-scheme por defecto; dark: solo bajo .tw-dark-root (no existe en el DOM). */
+@custom-variant dark (&:where(.tw-dark-root, .tw-dark-root *));
+
 /* You can add global styles to this file, and also import other style files */
 
 @import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
@@ -14,7 +18,6 @@
 
 html,
 body {
-  @apply bg-gray-900;
   color: white;
   font-family: 'Poppins', sans-serif !important;
 }
@@ -55,6 +58,41 @@ em {
 
 .chat-messages {
   @apply flex flex-col h-3/4 overflow-x-auto overflow-auto;
+}
+
+/* Chat shell: vacío (hero + composer + trail centrables) vs conversación (lista + composer) */
+.chat-shell {
+  @apply flex flex-col h-screen max-h-screen w-full min-h-0;
+}
+
+.chat-shell__body {
+  @apply flex flex-col flex-1 min-h-0;
+}
+
+.chat-shell--empty .chat-shell__body {
+  @apply justify-center;
+}
+
+.chat-shell--empty .chat-shell__messages {
+  @apply hidden;
+}
+
+.chat-shell--active .chat-shell__body {
+  @apply justify-start;
+}
+
+.chat-shell--active .chat-shell__hero,
+.chat-shell--active .chat-shell__trail {
+  @apply hidden;
+}
+
+/* El hilo va primero en el DOM; en activo crece y hace scroll; el compositor queda debajo sin flex-order. */
+.chat-shell--active .chat-shell__messages {
+  @apply flex flex-col flex-1 min-h-0 overflow-y-auto overflow-x-hidden;
+}
+
+.chat-shell--active .chat-shell__composer {
+  @apply shrink-0;
 }
 
 /* Scroll personalizado estilo ChatGPT */

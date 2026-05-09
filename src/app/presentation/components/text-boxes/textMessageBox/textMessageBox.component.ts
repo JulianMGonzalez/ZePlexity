@@ -7,6 +7,7 @@ import {
   inject,
   Input,
   Output,
+  signal,
   ViewChild,
 } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
