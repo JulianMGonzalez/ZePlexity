@@ -36,13 +36,30 @@
         >
           <i class="fa-solid fa-copy" aria-hidden="true"></i>
         </button>
+        <label class="sr-only" [for]="voiceSelectId">Voz del audio</label>
+        <select
+          [id]="voiceSelectId"
+          class="min-w-[7rem] max-w-[11rem] cursor-pointer rounded-full border border-gray-200 bg-white px-2 py-1 text-xs text-gray-700 shadow-sm outline-none transition-colors hover:border-gray-300 disabled:cursor-not-allowed disabled:opacity-60 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:border-gray-500"
+          [disabled]="isAudioLoading()"
+          [value]="selectedVoiceOption()"
+          (change)="onVoiceSelect($event)"
+        >
+          <option [value]="nativeOption">Default</option>
+          @for (v of apiVoices; track v) {
+            <option [value]="v">{{ apiVoiceLabel(v) }}</option>
+          }
+        </select>
         <button
           type="button"
-          class="rounded-full bg-gray-100 px-2 py-1 cursor-pointer text-sm text-gray-500 shadow-sm transition-colors hover:text-gray-700 dark:bg-gray-900 dark:bg-opacity-25 dark:text-gray-400 dark:hover:text-gray-200"
-          [attr.aria-label]="isSpeaking() ? 'Detener lectura' : 'Escuchar en audio'"
-          (click)="toggleSpeech()"
+          class="rounded-full bg-gray-100 px-2 py-1 cursor-pointer text-sm text-gray-500 shadow-sm transition-colors hover:text-gray-700 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-gray-900 dark:bg-opacity-25 dark:text-gray-400 dark:hover:text-gray-200"
+          [attr.aria-label]="
+            isAudioLoading() ? 'Generando audio' : isSpeaking() ? 'Detener audio' : 'Escuchar en audio'
+          "
+          (click)="toggleAudio()"
         >
-          @if (isSpeaking()) {
+          @if (isAudioLoading()) {
+            <i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i>
+          } @else if (isSpeaking()) {
             <i class="fa-solid fa-stop" aria-hidden="true"></i>
           } @else {
             <i class="fa-solid fa-volume-high" aria-hidden="true"></i>
