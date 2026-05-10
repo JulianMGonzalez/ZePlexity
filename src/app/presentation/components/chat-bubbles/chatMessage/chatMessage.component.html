@@ -1,17 +1,54 @@
 <div class="col-start-1 col-end-9 p-3">
   <div class="flex items-start gap-3">
     <div
-      class="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white text-base font-semibold">
+      class="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white text-base font-semibold"
+      aria-hidden="true"
+    >
       G
     </div>
 
-    <!-- Contenedor general -->
-    <div class="relative text-sm bg-gray-100 dark:bg-gray-900 dark:bg-opacity-25 px-4 py-3 rounded-2xl max-w-full break-words w-full dark:text-gray-300">
-      <markdown
-        class="markdown-message"
-        katex
-        [katexOptions]="katexOptions"
-        [data]="preparedMarkdown()"></markdown>
+    <div class="flex min-w-0 flex-1 flex-col gap-2">
+      <div
+        class="relative w-full max-w-full break-words rounded-2xl bg-gray-100 px-4 py-3 text-sm dark:bg-gray-900 dark:bg-opacity-25 dark:text-gray-300"
+      >
+        <markdown
+          class="markdown-message"
+          katex
+          [katexOptions]="katexOptions"
+          [data]="preparedMarkdown()"
+        ></markdown>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-2">
+        <button
+          type="button"
+          class="rounded-full bg-gray-100 px-2 py-1 cursor-pointer text-sm text-gray-500 shadow-sm transition-colors hover:text-gray-700 dark:bg-gray-900 dark:bg-opacity-25 dark:text-gray-400 dark:hover:text-gray-200"
+          [attr.aria-label]="'Compartir respuesta'"
+          (click)="share()"
+        >
+          <i class="fa-solid fa-share" aria-hidden="true"></i>
+        </button>
+        <button
+          type="button"
+          class="rounded-full bg-gray-100 px-2 py-1 cursor-pointer text-sm text-gray-500 shadow-sm transition-colors hover:text-gray-700 dark:bg-gray-900 dark:bg-opacity-25 dark:text-gray-400 dark:hover:text-gray-200"
+          [attr.aria-label]="'Copiar respuesta'"
+          (click)="copy()"
+        >
+          <i class="fa-solid fa-copy" aria-hidden="true"></i>
+        </button>
+        <button
+          type="button"
+          class="rounded-full bg-gray-100 px-2 py-1 cursor-pointer text-sm text-gray-500 shadow-sm transition-colors hover:text-gray-700 dark:bg-gray-900 dark:bg-opacity-25 dark:text-gray-400 dark:hover:text-gray-200"
+          [attr.aria-label]="isSpeaking() ? 'Detener lectura' : 'Escuchar en audio'"
+          (click)="toggleSpeech()"
+        >
+          @if (isSpeaking()) {
+            <i class="fa-solid fa-stop" aria-hidden="true"></i>
+          } @else {
+            <i class="fa-solid fa-volume-high" aria-hidden="true"></i>
+          }
+        </button>
+      </div>
     </div>
   </div>
 </div>
