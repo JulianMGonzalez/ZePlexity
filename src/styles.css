@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* Sin modo oscuro de Tailwind: v4 usa prefers-color-scheme por defecto; dark: solo bajo .tw-dark-root (no existe en el DOM). */
-/* @custom-variant dark (&:where(.tw-dark-root, .tw-dark-root *)); */
+@custom-variant dark (&:where(.tw-dark-root, .tw-dark-root *));
 
 /* You can add global styles to this file, and also import other style files */
 
